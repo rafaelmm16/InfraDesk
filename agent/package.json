@@ -1,0 +1,19 @@
+{
+  "name": "@infradesk/agent",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "InfraDesk Cross-Platform Endpoint Telemetry Agent & Active Directory Collector",
+  "scripts": {
+    "dev": "node src/index.ts",
+    "collect:once": "node src/index.ts --once",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "test": "node --test test/*.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}

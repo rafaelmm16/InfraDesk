@@ -1,0 +1,31 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: infradesk-backend
+    restart: unless-stopped
+    ports:
+      - "3333:3333"
+    environment:
+      PORT: "3333"
+      HOST: "0.0.0.0"
+      DB_PATH: "/app/data/infradesk.db"
+      JWT_SECRET: "${JWT_SECRET:-infradesk-prod-change-me}"
+      AGENT_API_KEY: "${AGENT_API_KEY:-idk_live_agent_9f8e7d6c5b4a}"
+    volumes:
+      - infradesk_data:/app/data
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: infradesk-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    environment:
+      BACKEND_INTERNAL_URL: "http://backend:3333"
+
+volumes:
+  infradesk_data:
